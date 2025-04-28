@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors'
-import helmet from 'helmet'
 import authRoutes from './src/routes/auth.routes.js';
 
 dotenv.config();
@@ -21,5 +20,5 @@ app.use('/auth', authRoutes);
 await mongoose.connect(process.env.MONGO_URI);
 console.log('✅  Mongo connected');
 
-const PORT = process.env.PORT ?? 5000;
+const PORT = process.env.PORT ?? 3002;
 app.listen(PORT, () => console.log(`🚀  Server on http://localhost:${PORT}`));

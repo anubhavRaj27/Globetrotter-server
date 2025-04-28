@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import Auth from "../models/auth.model.js";
 import User from "../models/user.model.js";
 import { randomUserId } from "../utils/common.js";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
   try {
@@ -15,7 +16,8 @@ export const register = async (req, res) => {
     await Auth.create({ userId, email, passwordHash: hash });
     await User.create({
       userId,
-      name,
+      email: email,
+      userName: name,
       score: 0,
       cities: [],
       friends: [],
@@ -33,8 +35,8 @@ export const login = async (req, res) => {
     if (!auth) return res.status(400).json({ error: "User Does not exist" });
     const isMatch = await bcrypt.compare(password, auth.passwordHash);
     if (!isMatch) return res.status(400).json({ msg: "Invalid credentials. " });
-    const user= User.findOne({email});
-    const token = jwt.sign({ id: user.userId }, process.env.JWT_SECRET);
+    const user= await User.findOne({email});
+    const token = jwt.sign({ id: user.userId }, process.env.JWT_SECERT_KEY);
     res.status(200).json({ token, user });
   } catch (err) {
     res.status(500).json({ error: err.message });
