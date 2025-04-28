@@ -1,4 +1,4 @@
-import {randomBytes} from 'crypto'
+import { randomUUID } from 'crypto';
 
 export const randomUserId = () =>
-  randomBytes(3).toString('base64url'); 
+  randomUUID(); 

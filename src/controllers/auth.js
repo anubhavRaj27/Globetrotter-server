@@ -1,6 +1,6 @@
 import bcrypt from "bcryptjs";
 import Auth from "../models/auth.model.js";
-import User from "../models/User.js";
+import User from "../models/user.model.js";
 import { randomUserId } from "../utils/common.js";
 
 export const register = async (req, res) => {
