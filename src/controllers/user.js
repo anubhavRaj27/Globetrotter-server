@@ -52,7 +52,6 @@ export const updateUser = async (req, res) => {
       { $set: updates },
       { new: true, runValidators: true }
     ).lean();
-    console.log(updatedUser);
     if (!updatedUser) {
       return res
         .status(404)
@@ -86,7 +85,6 @@ export const resetUser = async (req, res) => {
       { $set: resetFields },
       { new: true, lean: true }
     );
-    console.log(user);
     if (!user)
       return res
         .status(404)

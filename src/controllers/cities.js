@@ -24,7 +24,6 @@ export const getRandomCity = async (req, res) => {
     );
     return res.json(city);
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json({ error: "Server error" });
   }
 };

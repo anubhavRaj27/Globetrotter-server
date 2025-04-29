@@ -16,7 +16,6 @@ app.use("/cities", cityRoutes);
 app.use("/user", userRoutes)
 
 await mongoose.connect(process.env.MONGO_URI);
-console.log('✅  Mongo connected');
 
 const PORT = process.env.PORT ?? 3002;
 app.listen(PORT, () => console.log(`🚀  Server on http://localhost:${PORT}`));
