@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema(
     score: { type: Number, default: 0 },
     friends: { type: [String], default: [] },
     cities: { type: [String], default: [] },
-    currentCityId: { type: Number, default: 0 },
+    currentCityId: { type: String, default: null },
   },
   {
     timestamps: true,
