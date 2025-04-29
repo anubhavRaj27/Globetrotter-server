@@ -65,3 +65,35 @@ export const updateUser = async (req, res) => {
     return res.status(500).json({ status: "error", message: "Server error" });
   }
 };
+
+export const resetUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    if (!userId)
+      return res
+        .status(400)
+        .json({ status: "error", message: "Missing userId" });
+
+    const resetFields = {
+      correct: 0,
+      incorrect: 0,
+      cities: [],
+      currentCityId: 0,
+    };
+
+    const user = await User.findOneAndUpdate(
+      { userId },
+      { $set: resetFields },
+      { new: true, lean: true }
+    );
+    console.log(user);
+    if (!user)
+      return res
+        .status(404)
+        .json({ status: "error", message: "User not found" });
+
+    return res.status(200).json(user);
+  } catch (err) {
+    return res.status(500).json({ status: "error", message: err.message });
+  }
+};
