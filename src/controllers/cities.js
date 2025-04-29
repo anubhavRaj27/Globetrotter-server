@@ -44,3 +44,17 @@ export const getCity = async (req, res) => {
     return res.status(500).json({ error: "Server error" });
   }
 };
+
+export const getAnswer = async (req,res) => {
+    try{
+        const {answer} = req.query;
+        const {cityId} = req.params;
+        const city = await Cities.findOne(
+            { cityId }
+          ).lean();
+          if(answer===city.city)return res.status(200).json(true);
+          return res.status(200).json(false);
+    }catch (err) {
+        return res.status(500).json({ error: "Server error" });
+      }
+}

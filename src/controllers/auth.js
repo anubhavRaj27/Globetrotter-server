@@ -18,7 +18,8 @@ export const register = async (req, res) => {
       userId,
       email: email,
       userName: name,
-      score: 0,
+      correct: 0,
+      incorrect: 0,
       cities: [],
       friends: [],
     });
